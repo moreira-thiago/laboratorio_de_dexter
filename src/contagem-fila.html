@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contagem de Mensagens na Fila</title>
+    <link rel="stylesheet" type="text/css" href="estilo.css">
+    <style>
+        .button-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .button-container button {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Contagem de Mensagens na Fila</h1>
+    <div class="button-container">
+        <button class="obter-button" onclick="obterContagemFila()">Obter Contagem</button>
+        <button class="processar-button" onclick="processarFila(true)">Processar Fila</button>
+    </div>
+    <p>Contagem de mensagens na fila: <span id="contagem"></span></p>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+          const processarButton = document.querySelector('.processar-button');
+
+          processarButton.addEventListener('click', function () {
+              processarFila(true);
+          });
+      });
+
+      function obterContagemFila() {
+          fetch('http://192.168.0.150:5000/contagem-fila', { method: 'GET' })
+              .then(response => response.json())
+              .then(data => {
+                  if (data.contagem_fila !== undefined) {
+                      document.getElementById('contagem').textContent = data.contagem_fila;
+                  } else {
+                      alert('Erro ao obter a contagem da fila');
+                  }
+              })
+              .catch(error => {
+                  console.error('Erro ao fazer a solicitação:', error);
+              });
+      }
+
+      function processarFila(iniciar_processamento) {
+        fetch('http://192.168.0.150:5000/processar-fila', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ iniciar_processamento }),
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.message !== undefined) {
+              alert(data.message);
+            } else {
+              alert('Erro ao processar a fila');
+            }
+          })
+          .catch(error => {
+            console.error('Erro ao fazer a solicitação:', error);
+          });
+      }
+  </script>
+</body>
+</html>
