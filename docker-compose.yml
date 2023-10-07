@@ -76,7 +76,7 @@ services:
   backend-intermediario:
     image: backend-intermediario  
     build:
-	    context: ./ima/Dockerfile
+      context: ./ima/Dockerfile
     ports:
       - "5000:5000"
     environment:
