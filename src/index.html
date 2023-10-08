@@ -45,7 +45,7 @@
             var mensagem = "Data: " + data + ", Hora: " + hora + ", UUID: " + mensagemUUID + ", Nome: " + nome;
             $.ajax({
                type: "POST",
-               url: "http://192.168.0.150:5000/enviar-mensagem", // Substitua pelo endereço correto
+               url: "http://192.168.0.125:5000/enviar-mensagem", // Substitua pelo endereço correto
                data: JSON.stringify({
                   mensagem: mensagem
                }),

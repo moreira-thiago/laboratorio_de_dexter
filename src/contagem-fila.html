@@ -34,7 +34,7 @@
       });
 
       function obterContagemFila() {
-          fetch('http://192.168.0.150:5000/contagem-fila', { method: 'GET' })
+          fetch('http://192.168.0.125:5000/contagem-fila', { method: 'GET' })
               .then(response => response.json())
               .then(data => {
                   if (data.contagem_fila !== undefined) {
@@ -49,7 +49,7 @@
       }
 
       function processarFila(iniciar_processamento) {
-        fetch('http://192.168.0.150:5000/processar-fila', {
+        fetch('http://192.168.0.125:5000/processar-fila', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
