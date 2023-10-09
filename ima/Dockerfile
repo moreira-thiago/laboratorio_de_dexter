@@ -7,9 +7,6 @@ WORKDIR /app
 # Copie os arquivos de código-fonte para o contêiner
 COPY . .
 
-# Copie o arquivo .env (ou outro arquivo de configuração) para o contêiner
-COPY .env .
-
 # Instale as dependências do aplicativo
 RUN pip install -r requirements.txt
 

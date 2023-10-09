@@ -25,6 +25,8 @@
     <p>Contagem de mensagens na fila: <span id="contagem"></span></p>
 
     <script>
+      const ip = window.location.origin;
+
       document.addEventListener('DOMContentLoaded', function () {
           const processarButton = document.querySelector('.processar-button');
 
@@ -34,7 +36,7 @@
       });
 
       function obterContagemFila() {
-          fetch('http://192.168.0.125:5000/contagem-fila', { method: 'GET' })
+          fetch(`${ip}:5000/contagem-fila`, { method: 'GET' })
               .then(response => response.json())
               .then(data => {
                   if (data.contagem_fila !== undefined) {
@@ -49,7 +51,7 @@
       }
 
       function processarFila(iniciar_processamento) {
-        fetch('http://192.168.0.125:5000/processar-fila', {
+        fetch(`${ip}:5000/processar-fila`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

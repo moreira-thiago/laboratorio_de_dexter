@@ -45,7 +45,7 @@
             var mensagem = "Data: " + data + ", Hora: " + hora + ", UUID: " + mensagemUUID + ", Nome: " + nome;
             $.ajax({
                type: "POST",
-               url: "http://192.168.0.125:5000/enviar-mensagem", // Substitua pelo endereço correto
+               url: "http://" + window.location.hostname + ":5000/enviar-mensagem",
                data: JSON.stringify({
                   mensagem: mensagem
                }),
@@ -72,7 +72,7 @@
 </head>
 <body>
    <div class="container">
-      <h1>Enviar Mensagens</h1>
+      <h1>Envio de Mensagens</h1>
       <label for="quantidade">Quantidade de Mensagens:</label>
       <input type="number" id="quantidade" name="quantidade" min="1">
       <button type="button" class="enviar-button" onclick="enviarMensagens()">Enviar</button>
