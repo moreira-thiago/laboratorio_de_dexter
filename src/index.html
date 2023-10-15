@@ -20,6 +20,17 @@
          });
       }
 
+      // Função para formatar a data e hora no formato correto
+      function formatDateTime(dateTime) {
+         var day = String(dateTime.getDate()).padStart(2, '0');
+         var month = String(dateTime.getMonth() + 1).padStart(2, '0');
+         var year = dateTime.getFullYear();
+         var hours = String(dateTime.getHours()).padStart(2, '0');
+         var minutes = String(dateTime.getMinutes()).padStart(2, '0');
+         var seconds = String(dateTime.getSeconds()).padStart(2, '0');
+         return day + '/' + month + '/' + year + ' ' + hours + ':' + minutes + ':' + seconds;
+      }
+
       // Defina a função enviarMensagens no escopo global
       window.enviarMensagens = function() {
          var quantidade = parseInt(document.getElementById("quantidade").value);
@@ -39,10 +50,11 @@
 
             // Obtenha a data e hora atuais do sistema
             var dataHora = new Date();
-            var data = dataHora.toLocaleDateString();
-            var hora = dataHora.toLocaleTimeString();
-
+            var dataHoraFormatada = formatDateTime(dataHora); // Formate a data e hora
+            var data = dataHoraFormatada.split(' ')[0]; 
+            var hora = dataHoraFormatada.split(' ')[1];
             var mensagem = "Data: " + data + ", Hora: " + hora + ", UUID: " + mensagemUUID + ", Nome: " + nome;
+            
             $.ajax({
                type: "POST",
                url: "http://" + window.location.hostname + ":5000/enviar-mensagem",
@@ -66,8 +78,6 @@
             });
          }
       }
-
-
    </script>
 </head>
 <body>
@@ -78,7 +88,7 @@
       <button type="button" class="enviar-button" onclick="enviarMensagens()">Enviar</button>
    </div>
    <div class="container">
-      <button type="button" class="verificar-button" onclick="window.location.href='contagem-fila.html'">Verificar Fila</button>
+      <button type="button" class "verificar-button" onclick="window.location.href='contagem-fila.html'">Verificar Fila</button>
    </div>
    <div id="mensagemStatus"></div>
 </body>

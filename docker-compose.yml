@@ -27,7 +27,7 @@ services:
       RABBITMQ_QUEUE: ${RABBITMQ_QUEUE}
     entrypoint: >
       /bin/bash -c "  
-      sleep 20 && rabbitmqadmin --username=${RABBITMQ_USER} --password=${RABBITMQ_PASSWORD} declare queue name=${RABBITMQ_QUEUE} durable=true -H lab-rabbitmq
+      sleep 140 && rabbitmqadmin --username=${RABBITMQ_USER} --password=${RABBITMQ_PASSWORD} declare queue name=${RABBITMQ_QUEUE} durable=true -H lab-rabbitmq
       "
     networks:
       - app-network
@@ -86,6 +86,7 @@ services:
     environment:
       - rabbitmq_host=lab-rabbitmq
       - rabbitmq_queue=mensagens
+      - TZ=America/Sao_Paulo
     depends_on:
       - lab-rabbitmq
     env_file:
