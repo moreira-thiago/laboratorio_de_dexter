@@ -1,6 +1,6 @@
-Flask==3.0.0
-pika==1.2.0
-cors==1.0.1
-Flask-Cors==4.0.0
-mysql-connector-python==8.0.33
-python-decouple==3.8
+Flask
+pika
+cors
+Flask-Cors
+mysql-connector-python
+python-decouple
